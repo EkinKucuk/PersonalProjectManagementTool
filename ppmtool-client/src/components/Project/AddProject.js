@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Form } from "reactstrap";
+import { Container, Row, Form, FormGroup } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectActions";
@@ -48,7 +48,7 @@ class AddProject extends Component {
               <h5 className="display-4 text-center">Create Project form</h5>
               <hr />
               <Form onSubmit={this.onSubmit}>
-                <div className="form-group">
+                <FormGroup>
                   <input
                     type="text"
                     className={classnames("form-control form-control-lg ", {
@@ -62,8 +62,8 @@ class AddProject extends Component {
                   {errors.projectName && (
                     <div className="invalid-feedback">{errors.projectName}</div>
                   )}
-                </div>
-                <div className="form-group">
+                </FormGroup>
+                <FormGroup>
                   <input
                     type="text"
                     className={classnames("form-control form-control-lg", {
@@ -79,9 +79,9 @@ class AddProject extends Component {
                       {errors.projectIdentifier}
                     </div>
                   )}
-                </div>
+                </FormGroup>
 
-                <div className="form-group">
+                <FormGroup>
                   <textarea
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.description
@@ -94,9 +94,9 @@ class AddProject extends Component {
                   {errors.description && (
                     <div className="invalid-feedback">{errors.description}</div>
                   )}
-                </div>
+                </FormGroup>
                 <h6>Start Date</h6>
-                <div className="form-group">
+                <FormGroup>
                   <input
                     type="date"
                     className={classnames("form-control form-control-lg", {
@@ -109,9 +109,9 @@ class AddProject extends Component {
                   {errors.start_date && (
                     <div className="invalid-feedback">{errors.start_date}</div>
                   )}
-                </div>
+                </FormGroup>
                 <h6>Estimated End Date</h6>
-                <div className="form-group">
+                <FormGroup>
                   <input
                     type="date"
                     className={classnames("form-control form-control-lg", {
@@ -124,7 +124,7 @@ class AddProject extends Component {
                   {errors.end_date && (
                     <div className="invalid-feedback">{errors.end_date}</div>
                   )}
-                </div>
+                </FormGroup>
 
                 <input
                   type="submit"
