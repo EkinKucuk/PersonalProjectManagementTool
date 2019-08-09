@@ -1,4 +1,4 @@
-# PersonalProjectManagementTool
+# Personal Project ManagementTool
  It is a project learned from udemy. This project developed by using Java and ReactJS 
 # Prerequisites
 * java 8
