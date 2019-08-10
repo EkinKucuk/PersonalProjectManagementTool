@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
-
+import { Container, Row, Col } from "reactstrap";
 class ProjectItem extends Component {
   render() {
     const { project } = this.props;
     return (
-      <div className="container">
+      <Container>
         <div className="card card-body bg-light mb-3">
-          <div className="row">
-            <div className="col-2">
+          <Row>
+            <Col className="col-2">
               <span className="mx-auto">{project.projectIdentifier}</span>
-            </div>
-            <div className="col-lg-6 col-md-4 col-8">
+            </Col>
+            <Col className="col-lg-6 col-md-4 col-8">
               <h3>{project.projectName}</h3>
               <p>{project.description}</p>
-            </div>
-            <div className="col-md-4 d-none d-lg-block">
+            </Col>
+            <Col className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
                 <a href="#">
                   <li className="list-group-item board">
@@ -34,10 +34,10 @@ class ProjectItem extends Component {
                   </li>
                 </a>
               </ul>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </div>
-      </div>
+      </Container>
     );
   }
 }

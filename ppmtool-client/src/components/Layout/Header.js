@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Button, Nav } from "reactstrap";
+import { Button, Nav, NavItem, Container } from "reactstrap";
 class Header extends Component {
   render() {
     return (
       <Nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
-        <div className="container">
+        <Container>
           <a className="navbar-brand" href="Dashboard.html">
             Personal Project Management Tool
           </a>
@@ -19,27 +19,27 @@ class Header extends Component {
 
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
+              <NavItem>
                 <a className="nav-link" href="/dashboard">
                   Dashboard
                 </a>
-              </li>
+              </NavItem>
             </ul>
 
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
+              <NavItem>
                 <a className="nav-link " href="register.html">
                   Sign Up
                 </a>
-              </li>
-              <li className="nav-item">
+              </NavItem>
+              <NavItem>
                 <a className="nav-link" href="login.html">
                   Login
                 </a>
-              </li>
+              </NavItem>
             </ul>
           </div>
-        </div>
+        </Container>
       </Nav>
     );
   }
