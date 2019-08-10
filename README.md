@@ -7,7 +7,7 @@
 * Maven
 * Spring framework
 * STS/Eclipse or any java IDE
-#Installing
+# Installing
 
 # To run the project
 1. Go to client folder and run npm install on terminal
