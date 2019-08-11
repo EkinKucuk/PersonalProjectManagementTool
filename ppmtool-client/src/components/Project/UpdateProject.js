@@ -1,7 +1,31 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, FormGroup, Input } from "reactstrap";
+import { getProject } from "../../actions/projectActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
 class UpdateProject extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: "",
+      projectName: "",
+      projectIdentifier: "",
+      description: "",
+      start_date: "",
+      end_date: ""
+    };
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.getProject(id, this.props.history);
+  }
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render() {
     return (
       <div className="project">
@@ -61,4 +85,17 @@ class UpdateProject extends Component {
     );
   }
 }
-export default UpdateProject;
+
+UpdateProject.proopTypes = {
+  getProject: PropTypes.func.isRequired,
+  project: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  project: state.project.project
+});
+
+export default connect(
+  mapStateToProps,
+  { getProject }
+)(UpdateProject);
