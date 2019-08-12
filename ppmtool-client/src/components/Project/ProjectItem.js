@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
+import { connect } from "react-redux";
+import { deleteProject } from "../../actions/projectActions";
 class ProjectItem extends Component {
   render() {
     const { project } = this.props;
@@ -41,4 +43,7 @@ class ProjectItem extends Component {
     );
   }
 }
-export default ProjectItem;
+export default connect(
+  null,
+  { deleteProject }
+)(ProjectItem);
