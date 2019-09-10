@@ -18,9 +18,38 @@ class AddProjectTask extends Component {
       projectIdentifier: id,
       errors: {}
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const newTask = {
+      summary: this.state.summary,
+      acceptanceCriteria: this.state.acceptanceCriteria,
+      status: this.state.status,
+      priority: this.state.priority,
+      dueDate: this.state.dueDate
+    };
+
+    this.props.addProjectTask(
+      this.state.projectIdentifier,
+      newTask,
+      this.props.history
+    );
+  }
+
   render() {
     const { id } = this.props.match.params;
+    const { errors } = this.state;
     return (
       <div className="add-PBI">
         <Container>
@@ -31,15 +60,21 @@ class AddProjectTask extends Component {
               </Link>
               <h4 className="display-4 text-center">Add Project Task</h4>
               <p className="lead text-center">Project Name + Project Code</p>
-              <Form>
+              <Form onSubmit={this.onSubmit}>
                 <FormGroup>
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.summary
+                    })}
                     name="summary"
                     placeholder="Project Task summary"
                     value={this.state.summary}
+                    onChange={this.onChange}
                   />
+                  {errors.summary && (
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <textarea
@@ -47,6 +82,7 @@ class AddProjectTask extends Component {
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
                     value={this.state.acceptanceCriteria}
+                    onChange={this.onChange}
                   />
                 </FormGroup>
                 <h6>Due Date</h6>
@@ -56,6 +92,7 @@ class AddProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="dueDate"
                     value={this.state.dueDate}
+                    onChange={this.onChange}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -63,6 +100,7 @@ class AddProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="priority"
                     value={this.state.priority}
+                    onChange={this.onChange}
                   >
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
@@ -76,6 +114,7 @@ class AddProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="status"
                     value={this.state.status}
+                    onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
@@ -97,10 +136,11 @@ class AddProjectTask extends Component {
   }
 }
 AddProjectTask.propTypes = {
-  addProjectTask: PropTypes.func.isRequired
+  addProjectTask: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
-
+const mapStateToProps = state => ({ errors: state.errors });
 export default connect(
-  null,
+  mapStateToProps,
   { addProjectTask }
 )(AddProjectTask);
