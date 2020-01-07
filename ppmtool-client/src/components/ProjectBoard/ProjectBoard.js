@@ -11,7 +11,8 @@ class ProjectBoard extends Component {
     this.props.getBacklog(id);
   }
   render() {
-    const { id } = thi.props.match.params;
+    const { id } = this.props.match.params;
+    const { project_tasks } = this.props.backlog;
     return (
       <Container>
         <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
@@ -19,7 +20,7 @@ class ProjectBoard extends Component {
         </Link>
         <br />
         <hr />
-        <Backlog />
+        <Backlog project_tasks={project_tasks} />
       </Container>
     );
   }
@@ -33,7 +34,4 @@ const mapStateToProps = state => ({
   backlog: state.backlog
 });
 
-export default connect(
-  mapStateToProps,
-  { getBacklog }
-)(ProjectBoard);
+export default connect(mapStateToProps, { getBacklog })(ProjectBoard);
